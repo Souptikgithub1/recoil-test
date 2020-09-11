@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
 
-function App() {
+import Home from './components/Home';
+import AddPost from './components/AddPost';
+
+const routes = [
+  {
+    path: '/',
+    component: Home
+  },
+  {
+    path: '/add-post',
+    component: AddPost
+  }
+]
+
+const App = () => {
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/add-post">Add Post</Link></li>
+        </ul>
+        {routes.map(route => (
+              <Route key={route.path} {...route} exact />
+            ))
+        }
+        
+      </div>
+    </Router>
   );
 }
 
